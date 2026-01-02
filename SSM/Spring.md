@@ -1601,7 +1601,7 @@ public class App {
 
 ### 12.1 切入点表达式
 
-#### 12.1.1 标准语法结构（理解即可）
+#### 12.1.1 标准语法结构
 
 * `execution(访问修饰符 返回值 包名.类/接口名.方法名(参数) 异常名)`
 * 常用动作关键字：`execution(...)`（表示匹配方法执行）
@@ -1623,7 +1623,7 @@ private void pt(){}
   * 多级包匹配（不建议滥用，匹配范围大、效率低）：`com..service..`
 * `*` 匹配单层包：`com.*.*.*.update()`（只匹配固定层级）
 
-#### 12.1.3 书写技巧（更贴近工程实践）
+#### 12.1.3 书写技巧
 
 * **优先匹配接口而不是实现类**（降低耦合）。
 * 面向接口开发时访问修饰符常用 `public`（很多时候可省略）。
@@ -1669,7 +1669,7 @@ public Object around(ProceedingJoinPoint pjp) throws Throwable {
 
 ### 12.3 通知中获取数据
 
-### 12.3.1 获取参数
+#### 12.3.1 获取参数
 
 **非环绕通知获取参数：**
 
@@ -1694,7 +1694,7 @@ public Object around(ProceedingJoinPoint pjp) throws Throwable {
 }
 ```
 
-### 12.3.2 获取返回值
+#### 12.3.2 获取返回值
 
 ```java
 @AfterReturning(value = "pt()", returning = "ret")
@@ -1705,7 +1705,7 @@ public void afterReturning(Object ret) {
 
 * 只有方法**正常返回**才会进入返回后通知。
 
-### 12.3.3 获取异常
+#### 12.3.3 获取异常
 
 ```java
 @AfterThrowing(value = "pt()", throwing = "t")
@@ -1809,7 +1809,7 @@ public class XxxServiceImpl implements XxxService {
 }
 ```
 
-### 14.3 isolation 隔离级别（常见）
+### 14.3 isolation 隔离级别
 
 * `DEFAULT`：采用数据库默认隔离级别
 * `READ_UNCOMMITTED`：读未提交
@@ -1817,7 +1817,7 @@ public class XxxServiceImpl implements XxxService {
 * `REPEATABLE_READ`：重复读取
 * `SERIALIZABLE`：串行化
 
-### 14.4 传播行为与 REQUIRES_NEW（典型：日志独立提交）
+### 14.4 传播行为与 REQUIRES_NEW
 
 * 传播行为：当“方法 A（已有事务）”调用“方法 B（也声明事务）”时，B 如何处理现有事务。
 * 典型需求：主业务失败要回滚，但“日志/审计记录”必须保留。
@@ -1834,7 +1834,7 @@ public class LogServiceImpl implements LogService {
 }
 ```
 
-### 14.5 propagation 常见取值（理解即可）
+### 14.5 propagation 常见取值
 
 * `REQUIRED`：默认值；有事务加入，无事务新建
 * `REQUIRES_NEW`：无论是否存在事务，都新建事务（原事务挂起）
